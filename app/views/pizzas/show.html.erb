@@ -1,0 +1,27 @@
+<h1>
+  <%= @pizza.name %>
+</h1>
+
+<p>
+  <strong>Doe kind:</strong>
+  <%= @pizza.doe_kind %>
+</p>
+
+<p>
+  <strong>Toppings:</strong>
+  <%= @pizza.toppings %>
+</p>
+
+<p>
+  <strong>pictures:</strong>
+  <div class='row'>
+  	<% @pizza.pizza_pics.each do |pic| %>
+  		<div class='pizza-picture col-sm-3'>
+  			<p><%= image_tag pic.image_url %></p>
+  		</div>
+  	<% end %>
+  </div>
+</p>
+
+<%= link_to 'Edit', edit_pizza_path(@pizza) %> |
+<%= link_to 'Back', pizzas_path %>

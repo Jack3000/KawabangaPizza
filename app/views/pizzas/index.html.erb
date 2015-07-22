@@ -1,0 +1,23 @@
+<h1>Kawabanga Pizza!</h1>
+<h3>No drinks, no fuss, just pizza!</h3>
+
+<h4>Here are some of the pizzas we offer:</h4>
+<ul id="pizza-list" class="row">
+  <% @pizzas.each do |pizza| %>
+    <li class="pizza-column col-sm-3">
+      <div class="title-limiter">
+        <h3><%= pizza.name %></h3>
+      </div>
+      <div style="height: 150px; width: 150px; margin: 10px auto; background-color: #ffb068;" class="to-pizza-linker" data-pizza-id="<%= pizza.id %>"><%= image_tag pizza.pizza_pics.first.image_url(:thumb) if pizza.pizza_pics.first %></div>
+      <div class="info-limiter">
+        <p><b>Doe: </b><%= pizza.doe_kind %></p>
+      </div>
+      <div class="info-limiter">
+        <p><b>Toppings: </b><%= pizza.toppings.split(", ").slice(0, 3).join(", ") %></p>
+      </div>
+    </li>
+  <% end %>
+</ul>
+<br>
+
+<%= link_to 'New Pizza', new_pizza_path %>
