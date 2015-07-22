@@ -23,5 +23,6 @@
   </div>
 </p>
 
-<%= link_to 'Edit', edit_pizza_path(@pizza) %> |
-<%= link_to 'Back', pizzas_path %>
+<%= link_to 'Edit Pizza', edit_pizza_path(@pizza), class: 'btn btn-primary btn-xs' %> |
+<%= link_to 'Back to Main Menu', pizzas_path, class: 'btn btn-default btn-xs' %> |
+<%= link_to 'Remove Pizza', @pizza, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %>

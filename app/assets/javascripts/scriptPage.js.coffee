@@ -17,11 +17,26 @@ ready = ->
     reader.readAsDataURL file
     return
 
-  $('#images_row').sortable
+  $('.new-image-uploader input[type="file"]').on 'change', ->
+    $(this).siblings('input[type="hidden"]').prop('disabled', false)
+
+  $('.destroy-image').on 'click', ->
+    button = $(this)
+    $.ajax
+      url: window.location.href.slice(0, window.location.href.indexOf('/edit')) + '/pizza_pics/' + button.data('pic-id')
+      type: 'delete'
+      complete: ->
+        button.parent().parent().nextAll('.pizza-image').find('input.pic-num').each (index, el) ->
+          $(el).val($(el).val() - 1)
+        $('.pic_num').val($('.pic_num').val() - 1)
+        button.parent().parent().next('input[type="hidden"]').remove()
+        button.parent().parent().remove()
+
+  $('#image-row').sortable
      containment: "parent"
      stop: (event, ui) ->
-      $('#images_row>.pizza_image').each (i, el) ->
-        $(el).find('.pic_num').val(i + 1)
+      $('#image-row>.pizza-image').each (i, el) ->
+        $(el).find('.pic-num').val(i + 1)
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

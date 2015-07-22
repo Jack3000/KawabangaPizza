@@ -1,6 +1,7 @@
 <h1>Editing pizza</h1>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @pizza %> |
-<%= link_to 'Back', pizzas_path %>
+<div class='button-wrap'>
+	<%= link_to 'Nevermind', @pizza, class: 'btn btn-primary btn-xs' %> |
+	<%= link_to 'Back to Main Menu', pizzas_path, class: 'btn btn-default btn-xs' %>
+</div>

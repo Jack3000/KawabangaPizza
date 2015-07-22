@@ -31,15 +31,18 @@
     <input type="checkbox" name="toppings[]" value="Anchovy" id="Anchovy" />
     <label for="Anchovy">Anchovy</label>
   </div>
-  <div class='row' id='images_row'>
+  <div class='row' id='image-row'>
     <%= f.fields_for :pizza_pics do |builder| %>
       <% unless builder.object.new_record? %>
-        <div class='col-sm-3 pizza_image' style="height: 350px; margin-bottom: 30px;">
+        <div class='col-sm-3 pizza-image' style="height: 380px; margin-bottom: 30px;">
           <%= builder.file_field :image, class: "file file-" + builder.object.pic_num.to_s, style: "margin-bottom: 20px;" %>
           <div class="<%= 'image-preview image-preview-' + builder.object.pic_num.to_s %>">
-            <%= image_tag builder.object.image, style: "max-width: 300px; max-height:   300px;" %>  
-          </div>  
-          <%= builder.hidden_field :pic_num, value: builder.object.pic_num, class: 'pic_num' %>  
+            <%= image_tag builder.object.image, style: "max-width: 100%; max-height: 100%;" %>  
+          </div>
+          <div class='button-wrap'>
+            <input type='button' class='destroy-image btn btn-danger btn-xs' value='Delete Picture' data-pic-id="<%= builder.object.id %>">
+          </div>
+          <%= builder.hidden_field :pic_num, value: builder.object.pic_num, class: 'pic-num' %>  
         </div>
       <% end %>
     <% end %>
@@ -47,17 +50,17 @@
   <div class='row'>
     <%= f.fields_for :pizza_pics do |builder| %>
       <% if builder.object.new_record? %>
-        <div class='col-sm-3' style="height: 350px; margin-bottom: 30px;">
+        <div class='col-sm-3 new-image-uploader' style="height: 350px; margin-bottom: 30px;">
           <%= builder.file_field :image, class: "file file-" + @pizza.pizza_pics.length.to_s, style: "margin-bottom: 20px;" %>
           <div class="<%= 'image-preview image-preview-' + @pizza.pizza_pics.length.to_s %>">
-            <img / style='max-width: 300px; max-height: 300px;'>  
+            <img / style='max-width: 100%; max-height: 100%'>  
           </div>  
-          <%= builder.hidden_field :pic_num, value: @pizza.pizza_pics.length, class: 'pic_num' %>  
+          <%= builder.hidden_field :pic_num, value: @pizza.pizza_pics.length, class: 'pic_num', disabled: true %>  
         </div>
       <% end %>
     <% end %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary btn-xs' %>
   </div>
 <% end %>

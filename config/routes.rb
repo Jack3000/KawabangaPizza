@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :pizzas
+  resources :pizzas do
+    resources :pizza_pics, only: :destroy
+  end
 
   root 'pizzas#index'
   # The priority is based upon order of creation: first created -> highest priority.
