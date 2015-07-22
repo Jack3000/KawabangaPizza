@@ -8,7 +8,7 @@
       <div class="title-limiter">
         <h3><%= pizza.name %></h3>
       </div>
-      <div style="height: 150px; width: 150px; margin: 10px auto; background-color: #ffb068;" class="to-pizza-linker" data-pizza-id="<%= pizza.id %>"><%= image_tag pizza.pizza_pics.first.image_url(:thumb) if pizza.pizza_pics.first %></div>
+      <div style="height: 150px; width: 150px; margin: 10px auto; background-color: #ffb068;" class="to-pizza-linker" data-pizza-id="<%= pizza.id %>"><%= image_tag pizza.pizza_pics.find_by_pic_num(1).image_url(:thumb) if pizza.pizza_pics.first %></div>
       <div class="info-limiter">
         <p><b>Doe: </b><%= pizza.doe_kind %></p>
       </div>
