@@ -31,21 +31,30 @@
     <input type="checkbox" name="toppings[]" value="Anchovy" id="Anchovy" />
     <label for="Anchovy">Anchovy</label>
   </div>
-  <div class='row'>
-    <% i = 1 %>
+  <div class='row' id='images_row'>
     <%= f.fields_for :pizza_pics do |builder| %>
-      <div class='col-sm-3' style="height: 350px; margin-bottom: 30px;">
-        <%= builder.file_field :image, class: "file file-" + i.to_s, style: "margin-bottom: 20px;" %>
-        <div class="<%= 'image-preview image-preview-' + i.to_s %>">
-          <% if @pizza.pizza_pics[i - 1] %>
-            <%= image_tag @pizza.pizza_pics[i - 1].image, style: "max-width: 300px; max-height: 300px;" %>
-          <% else %>
-            <%= "<img / style='max-width: 300px; max-height: 300px;'>" %>
-          <% end %>
+      <% unless builder.object.new_record? %>
+        <div class='col-sm-3 pizza_image' style="height: 350px; margin-bottom: 30px;">
+          <%= builder.file_field :image, class: "file file-" + builder.object.pic_num.to_s, style: "margin-bottom: 20px;" %>
+          <div class="<%= 'image-preview image-preview-' + builder.object.pic_num.to_s %>">
+            <%= image_tag builder.object.image, style: "max-width: 300px; max-height:   300px;" %>  
+          </div>  
+          <%= builder.hidden_field :pic_num, value: builder.object.pic_num, class: 'pic_num' %>  
         </div>
-      </div>
-      <%= builder.hidden_field :pic_num, value: i %>
-      <% i += 1 %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class='row'>
+    <%= f.fields_for :pizza_pics do |builder| %>
+      <% if builder.object.new_record? %>
+        <div class='col-sm-3' style="height: 350px; margin-bottom: 30px;">
+          <%= builder.file_field :image, class: "file file-" + @pizza.pizza_pics.length.to_s, style: "margin-bottom: 20px;" %>
+          <div class="<%= 'image-preview image-preview-' + @pizza.pizza_pics.length.to_s %>">
+            <img / style='max-width: 300px; max-height: 300px;'>  
+          </div>  
+          <%= builder.hidden_field :pic_num, value: @pizza.pizza_pics.length, class: 'pic_num' %>  
+        </div>
+      <% end %>
     <% end %>
   </div>
   <div class="actions">
